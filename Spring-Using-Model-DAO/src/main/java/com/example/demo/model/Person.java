@@ -13,9 +13,9 @@ import lombok.ToString;
 @ToString
 public class Person {
 
-	private String name = "shubham";
+	private String name = "bhanu";
 	private int age = 22;
-	private float height = 5.6f;
+	private float height = 5.9f;
 	private boolean isProgrammer = true;
 	private Address address;
 	

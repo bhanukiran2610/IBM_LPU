@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class Address {
 
-	private int streetNo = 123;
-	private String streetName = "KalindiVihar";
-	private String city = "Agra";
+	private int streetNo = 14;
+	private String streetName = "GandhiNagar";
+	private String city = "Somala";
 	private String country = "India";
 }
