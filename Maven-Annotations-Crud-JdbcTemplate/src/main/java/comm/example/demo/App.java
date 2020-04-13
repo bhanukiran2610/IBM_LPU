@@ -1,5 +1,7 @@
 package comm.example.demo;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +22,27 @@ public class App
 
 	
 	
-	
-	public static void main( String[] args )
+public static void main( String[] args )
     {
 		ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
 		AccountService service=context.getBean("accountServiceImpl",AccountServiceImpl.class);
 		Account account=context.getBean("account",Account.class);
-		String str[]=UUID.randomUUID().toString().split("-");
-		account.setAccountNumber(str[0]);
-		account.setAccountType(AccountType.CURRENT);
-		account.setInitialBalance(2000);
-	
+		/*
+		 * String str[]=UUID.randomUUID().toString().split("-");
+		 * account.setAccountNumber(str[0]);
+		 * account.setAccountType(AccountType.CURRENT); account.setInitialBalance(2000);
 		account=service.createAccount(account);
-		System.out.println(account);
+		System.out.println(account);*/
+		
+		/*
+		 * List<Account> list=service.getAllAccountDetails(); Iterator<Account>
+		 * i=list.iterator(); while(i.hasNext()) { Account account2=i.next();
+		 * System.out.println(account2); }
+		 */
+		
+		  	account=service.findByAccountNumber("46555cd3");
+			System.out.println(account);
+			
 		
     }
 }
