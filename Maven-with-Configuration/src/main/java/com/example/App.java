@@ -15,10 +15,11 @@ public class App
 {
     public static void main( String[] args )
     {
+       @SuppressWarnings("resource")
        AnnotationConfigApplicationContext context= new AnnotationConfigApplicationContext(MyAppConfig.class);
-       Image image=context.getBean("image",Image.class);
-       image.setImageId(UUID.randomUUID().toString());
-       image.setImageUrl("demourl.com");
-       System.out.println(image);
+       Image imageObj=context.getBean("image",Image.class);
+       imageObj.setImageId(UUID.randomUUID().toString());
+       imageObj.setImageUrl("demourl.com");
+       System.out.println(imageObj);
     }
 }
