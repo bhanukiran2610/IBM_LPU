@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -48,20 +49,35 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	
 	
-	public void deleteById(String accountNumber) {
+	public void deleteById(String accountNumber) throws DataNotFoundException {
 		// TODO Auto-generated method stub
+		try {
 		String str="delete from account where accountNumber='"+accountNumber+"'";
-		 jdbcTemplate.update(str);
-		 System.out.println("account deleted successfully with id: "+accountNumber);
+		 int result=jdbcTemplate.update(str);
+		 if(result==0)
+			 System.out.println("No such account is found :"+accountNumber);
+		 else
+			 System.out.println("account deleted successfully with id: "+accountNumber);
+		 }
+		catch (DataAccessException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 	
 	
 	
-	public void updateByAccountNumber(String accountNumber, int initialBalance) {
+	public void updateByAccountNumber(String accountNumber, int initialBalance) throws DataNotFoundException {
+		try {
 		String SQL = "update account set balance= ? where accountNumber = ?";
-	      jdbcTemplate.update(SQL,initialBalance, accountNumber);
+	      int result=jdbcTemplate.update(SQL,initialBalance, accountNumber);
+	      if(result==0)
+	    	  //throw new DataNotFoundException();
+	    	  System.out.println("No such account found with accountNumber:"+accountNumber);
+	      else
 	      System.out.println("Account has been updated sucessfully with id "+accountNumber);
+		}catch(DataAccessException e) {e.printStackTrace();}
 	}
 	
 	public List<Account> findByAmount(int amount) {

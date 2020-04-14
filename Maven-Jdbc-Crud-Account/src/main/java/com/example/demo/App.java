@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.example.demo.model.Account;
+import com.example.demo.repo.DataNotFoundException;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.AccountServiceImpl;
 
@@ -55,14 +56,32 @@ public class App
         		}
         		
         	case 3:
-        		account=service.findByAccountNumber("4df12f7f");
+        		System.out.println("Enter the AccountNumber to Search :");
+    			String accNum=scanner.next();
+        		account=service.findByAccountNumber(accNum);
         		System.out.println(account);
         		break;
         	case 4:
-        		service.deleteById("4df12f7f");
+        		try {
+        			System.out.println("Enter the AccountNumber to be deleted :");
+        			String accNum1=scanner.next();
+					service.deleteById(accNum1);
+				} catch (DataNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         		break;
         	case 5:
-        		service.updateByAccountNumber("4df12f7f",110000);
+        		try {
+        			System.out.println("Enter the AccountNumber to be Updated :");
+        			String accNum2=scanner.next();
+        			System.out.println("Enter the Amount :");
+        			int amountValue=scanner.nextInt();
+					service.updateByAccountNumber(accNum2,amountValue);
+				} catch (DataNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         		break;
         	case 6:
         		 List<Account> l=service.findByAmount(5000);

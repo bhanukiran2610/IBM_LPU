@@ -3,10 +3,12 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Account;
 import com.example.demo.repo.AccountDAO;
+import com.example.demo.repo.DataNotFoundException;
 
 
 @Service
@@ -37,13 +39,18 @@ public class AccountServiceImpl implements AccountService {
 		return accountDAO.findByAccountNumber(accountNumber);
 	}
 	
-	public void deleteById(String accountNumber) {
+	public void deleteById(String accountNumber) throws DataNotFoundException {
 		accountDAO.deleteById(accountNumber);
 	}
 	
 	
-	public void updateByAccountNumber(String accountNumber, int initialBalance) {
-		accountDAO.updateByAccountNumber(accountNumber, initialBalance);
+	public void updateByAccountNumber(String accountNumber, int initialBalance) throws DataNotFoundException {
+		try {
+			accountDAO.updateByAccountNumber(accountNumber, initialBalance);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
