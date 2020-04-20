@@ -1,19 +1,20 @@
 package com.example.model;
 
+import lombok.AllArgsConstructor;
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class ToDo {
 	
 	private int id;
 	private String name;
 	private String completedBy;
-	public ToDo() {
-		super();
-	}
-	public ToDo(int id, String name, String completedBy) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.completedBy = completedBy;
-	}
+	
 	public int getId() {
 		return id;
 	}
