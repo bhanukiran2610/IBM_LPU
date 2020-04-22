@@ -1,5 +1,4 @@
 package com.example.entity;
-
 public class Student {
 
 	private String firstName;
@@ -9,10 +8,17 @@ public class Student {
 		
 	}
 
-	public Student(String firstName, String lastName) {
+
+
+
+	public Student( String firstName, String lastName) {
+		super();
+		
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+
+
 
 	public String getFirstName() {
 		return firstName;
@@ -29,5 +35,12 @@ public class Student {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
+
+
+
+	@Override
+	public String toString() {
+		return "Student [firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
 }
