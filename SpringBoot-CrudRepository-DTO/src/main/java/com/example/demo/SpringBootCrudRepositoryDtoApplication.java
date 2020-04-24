@@ -30,7 +30,7 @@ public class SpringBootCrudRepositoryDtoApplication implements CommandLineRunner
 		accountDAO.save(new Account(UUID.randomUUID().toString(), "Savings", 5000));
 		accountDAO.save(new Account(UUID.randomUUID().toString(), "CurrentAccount", 4000));
 		accountDAO.save(new Account(UUID.randomUUID().toString(), "Credit Card", 20000));
-		System.out.println(accountService.getAccounts().toString());
+		System.out.println(accountService.getAllAccounts().toString());
 	}
 
 }
