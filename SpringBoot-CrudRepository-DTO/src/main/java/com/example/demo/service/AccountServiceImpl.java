@@ -2,6 +2,9 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import javax.transaction.Transactional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -46,4 +49,68 @@ public class AccountServiceImpl implements AccountService {
 		  });
 		  return allAccounts;
 	}
+	
+	/*
+	 * @Override public ResponseEntity<AccountDTO> findAccountById(int id) { if
+	 * (accountDAO.findById(id).isPresent()) { Account account =
+	 * accountDAO.findById(id).get();
+	 * 
+	 * AccountDTO accountDTO = new AccountDTO(account.getAccountType(),
+	 * account.getBalance()); return ResponseEntity.ok().body(accountDTO); } else
+	 * return null; }
+	 */
+	
+	@Override
+	public ResponseEntity<AccountDTO> save(AccountDTO accountDto) {
+
+		Account account = new Account(UUID.randomUUID().toString(), accountDto.getAccountType(),
+				accountDto.getBalance());
+		accountDAO.save(account);
+		return ResponseEntity.ok().body(accountDto);
+	}
+	
+	@Override
+	public ResponseEntity<AccountDTO> deleteAccount(int id) {
+		if (accountDAO.findById(id).isPresent()) {
+			Account account = accountDAO.findById(id).get();
+			AccountDTO accountDto = new AccountDTO(account.getAccountType(), account.getBalance());
+			accountDAO.deleteById(id);
+		
+			return ResponseEntity.ok().body(accountDto);
+		} else
+			return null;
+	}
+	
+	@Override
+	@Transactional
+	public ResponseEntity<Account> updateAccont(Account account) {
+		if (accountDAO.findById(account.getAccountNumber()).isPresent()) {
+			accountDAO.save(account);
+			return ResponseEntity.ok().body(account);
+		} else
+			return null;
+
+	}
+	
+	@Override
+	public ResponseEntity<Iterable<Account>> findByAccountType(String accountType) {
+		Iterable<Account> accounts = accountDAO.findByAccountType(accountType);
+		return ResponseEntity.ok().body(accounts);
+	}
+	
+	
+
+	@Override
+	public ResponseEntity<Iterable<Account>> findByAccountTypeAndBalance(String accountType, double balance) {
+		Iterable<Account> accounts = accountDAO.findByAccountTypeAndBalance(accountType, balance);
+		return ResponseEntity.ok().body(accounts);
+	}
+	
+	@Override
+	@Transactional
+	public void removeByAccountType(String accountType) {
+		accountDAO.deleteByAccountType(accountType);
+		
+	}
+
 }

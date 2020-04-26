@@ -6,16 +6,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(description = "Api model for Account")
 @Entity
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "account_number",nullable = false)
 	private int accountNumber;
+	
 	@Column(name = "customer_relationship_number")
 	private String accountID;
+	
 	@Column(name = "account_type")
 	private String accountType;
+	
 	@Column(name = "balance")
 	private double balance;
 	
