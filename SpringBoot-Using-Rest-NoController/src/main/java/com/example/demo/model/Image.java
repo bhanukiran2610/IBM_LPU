@@ -6,16 +6,21 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 import lombok.Data;
 
 @Entity
 @Data
+
 public class Image {
 	@Id
 	@Column(name = "image_id")
 	private String imageID;
+	
+	
 	@Column(name = "image_url")
 	private String imageURL;
+	
 	@Column(name = "available")
 	@JsonProperty
 	private boolean isAvailable;
