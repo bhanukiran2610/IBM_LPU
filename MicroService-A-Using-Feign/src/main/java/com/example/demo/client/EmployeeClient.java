@@ -4,7 +4,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient("service-B")
+import com.example.demo.fallback.EmployeeFallBack;
+
+@FeignClient(value="service-B", fallback = EmployeeFallBack.class)
 public interface EmployeeClient {
 
 	@RequestMapping("/api/employees/hi")
