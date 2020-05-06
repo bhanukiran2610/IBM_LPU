@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: Ecommerce
+  boot:
+    admin:
+      client:
+        url: http://localhost:8000
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register: true
+  data:
+    rest:
+      base-path: /api
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: bhanukiran@1
+    url: jdbc:mysql://localhost:3306/hr?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  port: 8001
