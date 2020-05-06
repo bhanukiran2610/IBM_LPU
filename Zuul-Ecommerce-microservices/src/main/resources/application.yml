@@ -1,0 +1,21 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: Ecom-Zuul
+  boot:
+    admin:
+      client:
+        url: http://localhost:8000
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        register: true
+zuul:
+  prefix: /api
+  routes:
+    E_Commerce:
+      path: /**
+      serviceId: Ecommerce
